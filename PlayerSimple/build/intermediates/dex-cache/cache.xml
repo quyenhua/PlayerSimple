@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Quyen Hua\.gradle\caches\modules-2\files-2.1\org.jsoup\jsoup\1.10.2\33ee82e324f4b1e40167f3dc5e01234a1c5cab61\jsoup-1.10.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="33ee82e324f4b1e40167f3dc5e01234a1c5cab61">
+        <dex dex="E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\build\intermediates\pre-dexed\debug\jsoup-1.10.2_099cfbcf5de94ff561f06fcb15987ee97784199a.jar" />
+    </item>
+
+</items>

@@ -3,7 +3,14 @@ package com.example.quyenhua.playersimple;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+
+import com.example.quyenhua.playersimple.Baihat.Song;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,20 +22,68 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
+    EditText edTenbaihat;
+    ListView lvDanhsach;
+    Button btnSearch;
+    ArrayAdapter<String> adapter;
+
     String Id = "";
+    String name = "";
+    ArrayList<String> arrayList;
+    ArrayList<String> arrayTitle;
+
+    ArrayList<Song> arraySong;
+
+    String URL_SEARCH = "http://mp3.zing.vn/tim-kiem/bai-hat.html?q=";
+    String URL_SOURCE = "http://mp3.zing.vn/xml/song-xml/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        runOnUiThread(new Runnable() {
+        edTenbaihat = (EditText)findViewById(R.id.edTenbaihat);
+        lvDanhsach = (ListView)findViewById(R.id.lvDanhsachbaihat);
+        btnSearch = (Button)findViewById(R.id.btnSearch);
+
+        arrayList = new ArrayList<>();
+        arrayTitle = new ArrayList<>();
+        arraySong = new ArrayList<>();
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                new LoadData().execute("http://mp3.zing.vn/bai-hat/Anh-Yeu-Em-Khac-Viet/ZW79BFD9.html");
+            public void onClick(View view) {
+                //name = edTenbaihat.getText().toString();
+
+                StringUtils tenbaihat = new StringUtils();
+                name = tenbaihat.unAccent(edTenbaihat.getText().toString());
+                //Toast.makeText(MainActivity.this, name, Toast.LENGTH_LONG).show();
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new LoadData().execute( URL_SEARCH + name);
+                    }
+                });
+
+                //InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE); //tham chiếu tới INPUT service
+                //imm.hideSoftInputFromWindow(edTenbaihat.getWindowToken(), 0); //ẩn bàn phím
+            }
+        });
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, arrayList);
+        lvDanhsach.setAdapter(adapter);
+
+        lvDanhsach.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
             }
         });
     }
@@ -48,18 +103,11 @@ public class MainActivity extends AppCompatActivity {
 
             //String html = "<div><p>Lorem ipsum.</p>";
             Document doc = Jsoup.parse(s);
-            Elements div = doc.select("div#zplayerjs-wrapper");
-            String data_xml = div.attr("data-xml");
-            int point = 0;
-            for(int i = 0; i < data_xml.length(); i++){
-                if(String.valueOf(data_xml.charAt(i)).equals("/")){
-                    point = i;
-                }
+            Elements div = doc.select("div.item-song");
+            for(int i = 0; i < div.size(); i++) {
+                String data_code = div.get(i).attr("data-code");
+                arrayList.add(i, data_code);
             }
-            for(int point1 = point + 1; point1 < data_xml.length(); point1++){
-                Id = Id + String.valueOf(data_xml.charAt(point1));
-            }
-            Toast.makeText(MainActivity.this, Id, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -96,4 +144,14 @@ public class MainActivity extends AppCompatActivity {
         }
         return content.toString();
     }
+
+    public static class StringUtils{
+        public static String unAccent(String s) {
+            String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
+            Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+            return pattern.matcher(temp).replaceAll("").replaceAll("Đ", "D").replaceAll("đ", "d").replaceAll(" ", "");
+        }
+    }
+
+
 }
