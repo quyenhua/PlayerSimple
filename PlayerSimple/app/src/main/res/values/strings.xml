@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PlayerSimple</string>
+    <string name="search">Tim kiem</string>
+    <string name="setting">Cai dat</string>
 </resources>

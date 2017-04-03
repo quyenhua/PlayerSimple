@@ -1,4 +1,4 @@
-#Fri Mar 17 14:08:03 ICT 2017
+#Mon Apr 03 21:44:43 ICT 2017
 base.0=E\:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main
 renamed.0=classes.dex
 file.0=E\:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\1f\\main\\classes.dex

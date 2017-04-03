@@ -5,7 +5,7 @@ package com.example.quyenhua.playersimple.Baihat;
  */
 
 public class Song {
-    private String name;
+    private String title;
     private String artist;
     private String url;
     private String bgcover;
@@ -13,20 +13,20 @@ public class Song {
     private String artisturl;
 
     public Song(String name, String url) {
-        this.name = name;
+        this.title = title;
         this.url = url;
     }
 
-    public Song(String name, String artist, String url, String bgcover, String artisturl) {
-        this.name = name;
+    public Song(String title, String artist, String url, String bgcover, String artisturl) {
+        this.title = title;
         this.artist = artist;
         this.url = url;
         this.bgcover = bgcover;
         this.artisturl = artisturl;
     }
 
-    public Song(String name, String artist, String url, String bgcover, String mv, String artisturl) {
-        this.name = name;
+    public Song(String title, String artist, String url, String bgcover, String mv, String artisturl) {
+        this.title = title;
         this.artist = artist;
         this.url = url;
         this.bgcover = bgcover;
@@ -34,12 +34,12 @@ public class Song {
         this.artisturl = artisturl;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getArtist() {

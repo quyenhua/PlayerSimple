@@ -55,6 +55,12 @@ public class XMLDOMParser {
         return this.getTextNodeValue(nodes.item(0));
     }
 
+    public String getValue(org.w3c.dom.Document doc, String nameNode){
+        NodeList nodeList = doc.getElementsByTagName(nameNode);
+        String name = nodeList.item(0).getTextContent();
+        return  name;
+    }
+
     private final String getTextNodeValue(Node elem) {
         Node child;
         if( elem != null){
