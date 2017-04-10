@@ -8,12 +8,12 @@
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xxhdpi-v4\\abc_ic_star_black_16dp.png"
     },
     {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
-        "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
-    },
-    {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\dianhac.png",
         "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-xxhdpi\\dianhac.png"
+    },
+    {
+        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png"
     },
     {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
@@ -88,10 +88,6 @@
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png"
     },
     {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\loading.gif",
-        "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-xxhdpi\\loading.gif"
-    },
-    {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\next.png",
         "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-xxhdpi\\next.png"
     },
@@ -154,10 +150,6 @@
     {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png"
-    },
-    {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\load.png",
-        "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-xxhdpi\\load.png"
     },
     {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\abc_list_divider_mtrl_alpha.9.png",

@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:2:1-27:12
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:2:1-26:12
 	package
 		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:3:5-48
 		INJECTED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml
@@ -18,7 +18,7 @@ ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidMani
 	android:name
 		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:7:5-25:19
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:7:5-24:19
 MERGED from [com.android.support:appcompat-v7:24.0.0] C:\Users\Quyen Hua\.android\build-cache\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\output\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:animated-vector-drawable:24.0.0] C:\Users\Quyen Hua\.android\build-cache\bac9e81dd666d6bba82f9d18e5a5c7788ee961c7\output\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:support-vector-drawable:24.0.0] C:\Users\Quyen Hua\.android\build-cache\ae13c9376c2e62e0d159dd536471ca1b1dd5cfed\output\AndroidManifest.xml:23:5-20
@@ -58,10 +58,6 @@ activity#com.example.quyenhua.playersimple.RecentPlay.Player
 ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:23:9-55
 	android:name
 		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:23:19-52
-activity#com.example.quyenhua.playersimple.RecentPlay.FragmentSongList
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:24:9-74
-	android:name
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:24:19-62
 uses-sdk
 INJECTED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:24.0.0] C:\Users\Quyen Hua\.android\build-cache\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\output\AndroidManifest.xml:21:5-23:78

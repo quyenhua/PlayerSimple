@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.quyenhua.playersimple.Adapter.SongAdapter;
 import com.example.quyenhua.playersimple.Baihat.Song;
+import com.example.quyenhua.playersimple.RecentPlay.Player;
 import com.example.quyenhua.playersimple.loadurl.XMLDOMParser;
 
 import org.jsoup.Jsoup;
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             lvDanhsach.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent player = new Intent(MainActivity.this, PlayerMedia.class);
+                    Intent player = new Intent(MainActivity.this, Player.class);
                     arrayBaiHat = new ArrayList<>();
                     arrayBaiHat.add(arrayList.get(i));
                     arrayBaiHat.add(arraySong.get(i).getTitle());

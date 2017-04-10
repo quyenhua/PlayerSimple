@@ -21,7 +21,6 @@
         </activity>
         <activity android:name=".PlayerMedia" />
         <activity android:name=".RecentPlay.Player" />
-        <activity android:name=".RecentPlay.FragmentSongList"></activity>
     </application>
 
 </manifest>

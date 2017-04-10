@@ -1,20 +1,50 @@
 package com.example.quyenhua.playersimple.RecentPlay;
 
-import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.quyenhua.playersimple.Interface.ComunicationPlayer;
+import com.example.quyenhua.playersimple.Adapter.ViewPagerAdapter;
+import com.example.quyenhua.playersimple.MainActivity;
 import com.example.quyenhua.playersimple.R;
+import com.example.quyenhua.playersimple.Utility.Utility;
 
-public class Player extends Activity implements ComunicationPlayer{
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 
-    TextView textView;
-    Button button;
+public class Player extends FragmentActivity {
+
+    private ViewPager vpPlayer;
+    private ViewPagerAdapter viewPagerAdapter;
+
+    private ImageButton imgPlay, imgBack, imgNext, imgPre;
+    private TextView tvName, tvTimeStart, tvTimeEnd, tvSinger;
+    private SeekBar sbTime;
+
+    private ArrayList<String> arraySong;
+
+    private int loadSeekBar = 0;
+    private double timeStart = 0;
+    private double timeEnd = 0;
+
+    private String URL_SONG = "http://mp3.zing.vn/html5/song/";
+
+    private MediaPlayer mediaPlayer = new MediaPlayer();
+    private Handler myHandler = new Handler();
+    private Utility utility = new Utility();
+
+    private boolean firstLauch = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,31 +52,194 @@ public class Player extends Activity implements ComunicationPlayer{
 
         initializeView();
 
-        button.setOnClickListener(new View.OnClickListener() {
+        List<Fragment> fragmentList = new Vector<>();
+        fragmentList.add(Fragment.instantiate(this, FragmentSongList.class.getName()));
+        fragmentList.add(Fragment.instantiate(this, FragmentPlayer.class.getName()));
+
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList);
+        vpPlayer.setAdapter(viewPagerAdapter);
+
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null) {
+            arraySong = bundle.getStringArrayList("arrSong");
+        }
+
+        tvName.setText(arraySong.get(1));
+        tvSinger.setText(arraySong.get(2));
+
+        playMedia();
+        setBack();
+        setPlay();
+        setNext();
+        setPrevious();
+        setSeekbar();
+
+    }
+
+    private void initializeView(){
+        vpPlayer = (ViewPager) findViewById(R.id.vpPlayer);
+        imgBack = (ImageButton)findViewById(R.id.imgBack);
+        imgPlay = (ImageButton)findViewById(R.id.imgPlay);
+        imgNext = (ImageButton)findViewById(R.id.imgNext);
+        imgPre = (ImageButton)findViewById(R.id.imgPre);
+        tvName = (TextView)findViewById(R.id.tvName);
+        sbTime = (SeekBar)findViewById(R.id.sbTime);
+        tvTimeStart = (TextView)findViewById(R.id.tvTimeCurrent);
+        tvTimeEnd = (TextView)findViewById(R.id.tvTimeEnd);
+        tvSinger = (TextView)findViewById(R.id.tvSinger);
+    }
+
+    private void setBack(){
+        imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                FragmentSongList fragmentSongList = new FragmentSongList();
-                Bundle bundle = new Bundle();
-                bundle.putString("dulieu", "dữ liệu được truyền qua fragment");
-
-                fragmentSongList.setArguments(bundle);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                //fragmentTransaction.add(R.id.layoutfragmentplayer, new FragmentPlayer());
-                fragmentTransaction.add(R.id.layoutfragmentsonglist, fragmentSongList);
-                fragmentTransaction.commit();
+                Intent retMain = new Intent(Player.this, MainActivity.class);
+                startActivity(retMain);
             }
         });
     }
 
-    private void initializeView(){
-        textView = (TextView) findViewById(R.id.text);
-        button = (Button) findViewById(R.id.button2);
+    private void setPlay(){
+        imgPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mediaPlayer.isPlaying() && mediaPlayer != null) {
+                    mediaPlayer.pause();
+                    imgPlay.setImageResource(R.drawable.play);
+                }
+                else{
+                    if(firstLauch){
+                        imgPlay.setImageResource(R.drawable.pause);
+                        playMedia();
+                    }
+                    else{
+                        imgPlay.setImageResource(R.drawable.pause);
+                        mediaPlayer.start();
+                        firstLauch = false;
+                    }
+                }
+            }
+        });
+    }
+
+    private void setNext(){
+        imgNext.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                double timeDB = timeStart + 5000;
+                if(timeDB <= timeEnd){
+                    mediaPlayer.seekTo((int) timeDB);
+                }
+                else{
+                    mediaPlayer.seekTo((int) timeEnd);
+                }
+                return false;
+            }
+        });
+    }
+
+    private void setPrevious(){
+        imgPre.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                double timeDB = timeStart - 5000;
+                imgPlay.setImageResource(R.drawable.pause);
+                if(timeDB >= 0){
+                    mediaPlayer.seekTo((int) timeDB);
+                }
+                else{
+                    mediaPlayer.seekTo(0);
+                }
+                return false;
+            }
+        });
+    }
+
+    private void setSeekbar(){
+        sbTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if(b){
+                    mediaPlayer.seekTo(i);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekBar.setProgress(loadSeekBar);
+            }
+        });
+    }
+
+    private void playMedia(){
+        firstLauch = false;
+        try {
+            mediaPlayer.setDataSource(arraySong.get(3));
+        } catch (IOException e) {
+            try {
+                mediaPlayer.setDataSource(URL_SONG + arraySong.get(0));
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        }
+
+        mediaPlayer.prepareAsync();
+        mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                //playCircle();
+                imgPlay.setImageResource(R.drawable.pause);
+                mediaPlayer.start();
+                timeEnd = mediaPlayer.getDuration();
+                if(loadSeekBar == 0){
+                    sbTime.setMax((int) timeEnd);
+                }
+                myHandler.postDelayed(UpdateTime, 100);
+                tvTimeEnd.setText(utility.convertDuration((long) timeEnd));
+            }
+        });
+    }
+
+    private Runnable UpdateTime = new Runnable() {
+        @Override
+        public void run() {
+            timeStart = mediaPlayer.getCurrentPosition();
+            tvTimeStart.setText(utility.convertDuration((long) timeStart));
+            myHandler.postDelayed(this, 100);
+            sbTime.setProgress((int) timeStart);
+            if(utility.convertDuration((long) timeEnd) == utility.convertDuration((long) timeStart)){
+                imgPlay.setImageResource(R.drawable.play);
+            }
+        }
+    };
+
+    /*private void playCircle(){
+        if(mediaPlayer.isPlaying()){
+            runnable = new Runnable() {
+                @Override
+                public void run() {
+                    playCircle();
+                }
+            };
+            handler.postDelayed(runnable, 100);
+        }
+    }*/
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mediaPlayer.start();
+        //playCircle();
     }
 
     @Override
-    public void changeText(String text) {
-        textView.setText(text);
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
     }
 }

@@ -32,10 +32,6 @@
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\loading.gif",
-        "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-xhdpi\\loading.gif"
-    },
-    {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png",
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xhdpi-v4\\abc_scrubber_track_mtrl_alpha.9.png"
     },
@@ -80,16 +76,16 @@
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png"
     },
     {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png",
-        "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png"
+        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png",
+        "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png"
     },
     {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\demo.png",
         "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-xhdpi\\demo.png"
     },
     {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png",
-        "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xhdpi-v4\\abc_popup_background_mtrl_mult.9.png"
+        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png",
+        "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xhdpi-v4\\abc_ic_star_black_36dp.png"
     },
     {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_star_black_16dp.png",
@@ -206,9 +202,5 @@
     {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-xhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png"
-    },
-    {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\load.png",
-        "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-xhdpi\\load.png"
     }
 ]

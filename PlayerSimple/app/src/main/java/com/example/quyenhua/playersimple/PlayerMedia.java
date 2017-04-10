@@ -35,8 +35,6 @@ public class PlayerMedia extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer = new MediaPlayer();
     private Handler myHandler = new Handler();
-    private Handler handler = new Handler();
-    private Runnable runnable;
     private Utility utility = new Utility();
 
     private boolean firstLauch = true;

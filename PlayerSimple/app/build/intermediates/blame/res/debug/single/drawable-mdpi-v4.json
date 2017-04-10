@@ -36,12 +36,12 @@
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-mdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
     {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\back.png",
-        "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-mdpi\\back.png"
-    },
-    {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png",
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-mdpi-v4\\abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\back.png",
+        "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-mdpi\\back.png"
     },
     {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
@@ -52,20 +52,16 @@
         "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-mdpi\\dianhac.png"
     },
     {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_ic_star_half_black_36dp.png",
-        "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_36dp.png"
-    },
-    {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_list_longpressed_holo.9.png",
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-mdpi-v4\\abc_list_longpressed_holo.9.png"
     },
     {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
-        "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
+        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_ic_star_half_black_36dp.png",
+        "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_36dp.png"
     },
     {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\loading.gif",
-        "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-mdpi\\loading.gif"
+        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
+        "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-mdpi-v4\\abc_btn_check_to_on_mtrl_000.png"
     },
     {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
@@ -110,10 +106,6 @@
     {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\abc_ic_star_half_black_16dp.png",
         "source": "C:\\Users\\Quyen Hua\\.android\\build-cache\\d5f8947f2146a1a5d833365a0fd1c2cc7aa9fbd3\\output\\res\\drawable-mdpi-v4\\abc_ic_star_half_black_16dp.png"
-    },
-    {
-        "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\load.png",
-        "source": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\src\\main\\res\\drawable-mdpi\\load.png"
     },
     {
         "merged": "E:\\quyen\\HK8\\tttn\\AndroidPlayer\\PlayerSimple\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher.png",

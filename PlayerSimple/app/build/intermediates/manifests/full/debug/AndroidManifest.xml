@@ -27,7 +27,6 @@
         </activity>
         <activity android:name="com.example.quyenhua.playersimple.PlayerMedia" />
         <activity android:name="com.example.quyenhua.playersimple.RecentPlay.Player" />
-        <activity android:name="com.example.quyenhua.playersimple.RecentPlay.FragmentSongList" />
     </application>
 
 </manifest>
