@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,15 +23,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+
+import static com.example.quyenhua.playersimple.loadurl.XMLDOMParser.LoadDataFromURL;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
@@ -46,10 +41,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private ArrayList<Song> arraySong;
     private ArrayList<String> arrayBaiHat;
 
+    private  XMLDOMParser parser = new XMLDOMParser();
+
     private String name = "";
 
-    private String URL_SEARCH = "http://mp3.zing.vn/tim-kiem/bai-hat.html?q=";
-    private String URL_SOURCE = "http://mp3.zing.vn/xml/song-xml/";
+    public final String URL_SEARCH = "http://mp3.zing.vn/tim-kiem/bai-hat.html?q=";
+    public final String URL_SOURCE = "http://mp3.zing.vn/xml/song-xml/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 new LoadXML().execute(URL_SOURCE + data_code);
             }
             pbListSong.setVisibility(View.INVISIBLE);
-            Toast.makeText(MainActivity.this,"" + arrayList.size(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -106,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            XMLDOMParser parser = new XMLDOMParser();
             org.w3c.dom.Document doc = parser.getDocument(s);
 
             String title = parser.getValue(doc, "title");
@@ -143,39 +138,39 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         }
     }
 
-    private static String LoadDataFromURL(String theUrl) {
-        StringBuilder content = new StringBuilder();
-
-        try
-        {
-            // create a url object
-            URL url = new URL(theUrl);
-
-            Log.d("URL", String.valueOf(url));
-            // create a urlconnection object
-            URLConnection urlConnection = url.openConnection();
-
-            // wrap the urlconnection in a bufferedreader
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-
-            String line;
-
-            // read from the urlconnection via the bufferedreader
-            while ((line = bufferedReader.readLine()) != null)
-            {
-                content.append(line + "\n");
-            }
-            bufferedReader.close();
-
-        }
-        catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return content.toString();
-    }
+//    private static String LoadDataFromURL(String theUrl) {
+//        StringBuilder content = new StringBuilder();
+//
+//        try
+//        {
+//            // create a url object
+//            URL url = new URL(theUrl);
+//
+//            Log.d("URL", String.valueOf(url));
+//            // create a urlconnection object
+//            URLConnection urlConnection = url.openConnection();
+//
+//            // wrap the urlconnection in a bufferedreader
+//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+//
+//            String line;
+//
+//            // read from the urlconnection via the bufferedreader
+//            while ((line = bufferedReader.readLine()) != null)
+//            {
+//                content.append(line + "\n");
+//            }
+//            bufferedReader.close();
+//
+//        }
+//        catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//        catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return content.toString();
+//    }
 
     public static class StringUtils{
         public static String unAccent(String s) {
@@ -226,10 +221,13 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    new LoadData().execute(URL_SEARCH + name);
+                    for(int i=1; i<= 10; i++) {
+                        new LoadData().execute(URL_SEARCH + name + "&page=" + i);
+                    }
                 }
             });
         }
+        //Toast.makeText(MainActivity.this,"" + arrayList.size(), Toast.LENGTH_SHORT).show();
         return true;
     }
 

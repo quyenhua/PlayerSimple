@@ -35,8 +35,9 @@ public class SongAdapter extends ArrayAdapter<Song>{
         View rowView = convertView;
         ViewHolder viewHolder;
         if(rowView == null){
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            rowView = inflater.inflate(R.layout.item_list_song, null);
+            //LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            //rowView = inflater.inflate(R.layout.item_list_song, null);
+            rowView = LayoutInflater.from(context).inflate(R.layout.item_list_song, null);
             viewHolder = new ViewHolder();
             viewHolder.imageSong = (ImageView)rowView.findViewById(R.id.imageSong);
             viewHolder.title = (TextView)rowView.findViewById(R.id.tvTitle);

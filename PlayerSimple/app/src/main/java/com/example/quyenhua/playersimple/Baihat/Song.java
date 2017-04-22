@@ -8,6 +8,7 @@ public class Song {
     private String title;
     private String artist;
     private String url;
+    private String liric;
     private String bgcover;
     private String mv;
     private String artisturl;
@@ -15,6 +16,16 @@ public class Song {
     public Song(String name, String url) {
         this.title = title;
         this.url = url;
+    }
+
+    public Song(String title, String artist, String url, String liric, String bgcover, String mv, String artisturl) {
+        this.title = title;
+        this.artist = artist;
+        this.url = url;
+        this.liric = liric;
+        this.bgcover = bgcover;
+        this.mv = mv;
+        this.artisturl = artisturl;
     }
 
     public Song(String title, String artist, String url, String bgcover, String artisturl) {
@@ -32,6 +43,14 @@ public class Song {
         this.bgcover = bgcover;
         this.mv = mv;
         this.artisturl = artisturl;
+    }
+
+    public String getLiric() {
+        return liric;
+    }
+
+    public void setLiric(String liric) {
+        this.liric = liric;
     }
 
     public String getTitle() {

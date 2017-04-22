@@ -2,7 +2,7 @@ package com.example.quyenhua.playersimple.Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Quyen Hua on 4/3/2017.
  */
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
+public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragmentList;
     public ViewPagerAdapter(FragmentManager fm, List<Fragment> fragmentList) {
@@ -26,5 +26,14 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public int getCount() {
         return fragmentList.size();
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        switch (position){
+            case 0: return "section 1";
+            case 1: return "section 2";
+        }
+        return null;
     }
 }
