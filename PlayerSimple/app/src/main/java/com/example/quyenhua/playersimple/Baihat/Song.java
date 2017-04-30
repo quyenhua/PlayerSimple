@@ -13,7 +13,7 @@ public class Song {
     private String mv;
     private String artisturl;
 
-    public Song(String name, String url) {
+    public Song(String title, String url) {
         this.title = title;
         this.url = url;
     }

@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private String name = "";
 
+    //http://mp3.zing.vn/json/song/get-source/ZnJGtkmsCZvLiSCyLbxTbHZH SOURCE CODE JSON
     public final String URL_SEARCH = "http://mp3.zing.vn/tim-kiem/bai-hat.html?q=";
     public final String URL_SOURCE = "http://mp3.zing.vn/xml/song-xml/";
 
@@ -103,74 +104,50 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             super.onPostExecute(s);
 
             org.w3c.dom.Document doc = parser.getDocument(s);
+            if(doc != null) {
+                String title = parser.getValue(doc, "title");
+                String artist = parser.getValue(doc, "performer");
+                String url = parser.getValue(doc, "source");
+                String lyric = parser.getValue(doc, "lyric");
+                String backimage = parser.getValue(doc, "backimage");
+                String mv = parser.getValue(doc, "mv");
+                String link = parser.getValue(doc, "link");
 
-            String title = parser.getValue(doc, "title");
-            String artist = parser.getValue(doc, "performer");
-            String url = parser.getValue(doc, "source");
-            String backimage = parser.getValue(doc, "backimage");
-            if(backimage == "") {
-                backimage = "http://1.bp.blogspot.com/-3oZ7k46VeG4/Vk0d1nmNODI/AAAAAAAAC20/3B1E5A8BDC4/s1600/hinh-anh-dep-ve-dong-vat..jpg";
-            }
-            String mv = parser.getValue(doc, "mv");
-            String link = parser.getValue(doc, "link");
-
-            arraySong.add(new Song(title, artist, url, backimage, mv, link));
-            //Toast.makeText(MainActivity.this, "" + arraySong.size(), Toast.LENGTH_SHORT).show();
-            adapter = new SongAdapter(MainActivity.this, R.layout.item_list_song, arraySong);
-            adapter.notifyDataSetChanged();
-            lvDanhsach.setAdapter(adapter);
-
-            lvDanhsach.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    Intent player = new Intent(MainActivity.this, Player.class);
-                    arrayBaiHat = new ArrayList<>();
-                    arrayBaiHat.add(arrayList.get(i));
-                    arrayBaiHat.add(arraySong.get(i).getTitle());
-                    arrayBaiHat.add(arraySong.get(i).getArtist());
-                    arrayBaiHat.add(arraySong.get(i).getUrl());
-                    player.putStringArrayListExtra("arrSong", arrayBaiHat);
-                    startActivity(player);
-                    //Intent player = new Intent(MainActivity.this, Player.class);
-                    //startActivity(player);
+                if (artist == "") {
+                    artist = "Đang cập nhật";
                 }
-            });
+                if (backimage == "") {
+                    backimage = "http://1.bp.blogspot.com/-3oZ7k46VeG4/Vk0d1nmNODI/AAAAAAAAC20/3B1E5A8BDC4/s1600/hinh-anh-dep-ve-dong-vat..jpg";
+                }
+
+                arraySong.add(new Song(title, artist, url, lyric, backimage, mv, link));
+                //Toast.makeText(MainActivity.this, "" + arraySong.size(), Toast.LENGTH_SHORT).show();
+                adapter = new SongAdapter(MainActivity.this, R.layout.item_list_song, arraySong);
+                adapter.notifyDataSetChanged();
+                lvDanhsach.setAdapter(adapter);
+
+                lvDanhsach.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Intent player = new Intent(MainActivity.this, Player.class);
+                        arrayBaiHat = new ArrayList<>();
+                        arrayBaiHat.add(arrayList.get(i));
+                        arrayBaiHat.add(arraySong.get(i).getTitle());
+                        arrayBaiHat.add(arraySong.get(i).getArtist());
+                        arrayBaiHat.add(arraySong.get(i).getUrl());
+                        arrayBaiHat.add(arraySong.get(i).getLiric());
+                        arrayBaiHat.add(arraySong.get(i).getBgcover());
+                        arrayBaiHat.add(arraySong.get(i).getMv());
+                        arrayBaiHat.add(arraySong.get(i).getArtisturl());
+                        player.putStringArrayListExtra("arrSong", arrayBaiHat);
+                        startActivity(player);
+                        //Intent player = new Intent(MainActivity.this, Player.class);
+                        //startActivity(player);
+                    }
+                });
+            }
         }
     }
-
-//    private static String LoadDataFromURL(String theUrl) {
-//        StringBuilder content = new StringBuilder();
-//
-//        try
-//        {
-//            // create a url object
-//            URL url = new URL(theUrl);
-//
-//            Log.d("URL", String.valueOf(url));
-//            // create a urlconnection object
-//            URLConnection urlConnection = url.openConnection();
-//
-//            // wrap the urlconnection in a bufferedreader
-//            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-//
-//            String line;
-//
-//            // read from the urlconnection via the bufferedreader
-//            while ((line = bufferedReader.readLine()) != null)
-//            {
-//                content.append(line + "\n");
-//            }
-//            bufferedReader.close();
-//
-//        }
-//        catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//        catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return content.toString();
-//    }
 
     public static class StringUtils{
         public static String unAccent(String s) {
@@ -218,14 +195,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             pbListSong.setVisibility(View.VISIBLE);
             arrayList = new ArrayList<>();
             arraySong = new ArrayList<>();
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    for(int i=1; i<= 10; i++) {
-                        new LoadData().execute(URL_SEARCH + name + "&page=" + i);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new LoadData().execute(URL_SEARCH + name);
                     }
-                }
-            });
+                });
         }
         //Toast.makeText(MainActivity.this,"" + arrayList.size(), Toast.LENGTH_SHORT).show();
         return true;

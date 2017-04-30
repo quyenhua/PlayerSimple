@@ -1,5 +1,6 @@
 package com.example.quyenhua.playersimple.RecentPlay;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
@@ -13,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,8 @@ import com.example.quyenhua.playersimple.MainActivity;
 import com.example.quyenhua.playersimple.R;
 import com.example.quyenhua.playersimple.Utility.Utility;
 import com.example.quyenhua.playersimple.loadurl.XMLDOMParser;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -48,7 +52,7 @@ public class Player extends FragmentActivity {
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
 
-    private ImageButton imgPlay, imgBack, imgNext, imgPre;
+    private ImageButton imgPlay, imgBack, imgNext, imgPre, imgInfo;
     private TextView tvName, tvTimeStart, tvTimeEnd, tvSinger;
     private SeekBar sbTime;
 
@@ -81,8 +85,9 @@ public class Player extends FragmentActivity {
 
         arrItemSong = new ArrayList<>();
         List<Fragment> fragmentList = new Vector<>();
-        fragmentList.add(Fragment.instantiate(this, FragmentSongList.class.getName()));
         fragmentList.add(Fragment.instantiate(this, FragmentPlayer.class.getName()));
+        fragmentList.add(Fragment.instantiate(this, FragmentSongList.class.getName()));
+        fragmentList.add(Fragment.instantiate(this, FragmentLyric.class.getName()));
 
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList);
         vpPlayer.setAdapter(viewPagerAdapter);
@@ -99,13 +104,132 @@ public class Player extends FragmentActivity {
 
         playMedia();
         saveDataSong(arraySong.get(0));
-        setBack();
-        setPlay();
-        setNext();
-        setPrevious();
-        setSeekbar();
+        setEvent();
 
     }
+
+    private void setEvent() {
+        imgPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mediaPlayer.isPlaying() && mediaPlayer != null) {
+                    mediaPlayer.pause();
+                    imgPlay.setBackgroundResource(android.R.drawable.ic_media_play);
+                }
+                else{
+                    if(firstLauch){
+                        imgPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
+                        playMedia();
+                    }
+                    else{
+                        imgPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
+                        mediaPlayer.start();
+                        firstLauch = false;
+                    }
+                }
+            }
+        });
+
+        imgNext.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                double timeDB = timeStart + 5000;
+                if(timeDB <= timeEnd){
+                    mediaPlayer.seekTo((int) timeDB);
+                }
+                else{
+                    mediaPlayer.seekTo((int) timeEnd);
+                }
+                return false;
+            }
+        });
+
+        imgPre.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                double timeDB = timeStart - 5000;
+                imgPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
+                if(timeDB >= 0){
+                    mediaPlayer.seekTo((int) timeDB);
+                }
+                else{
+                    mediaPlayer.seekTo(0);
+                }
+                return false;
+            }
+        });
+
+        sbTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if(b){
+                    mediaPlayer.seekTo(i);
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                seekBar.setProgress(loadSeekBar);
+            }
+        });
+
+        imgInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Dialog dialog = new Dialog(Player.this);
+                dialog.setTitle("Infomation");
+                dialog.setCancelable(true);
+                dialog.setContentView(R.layout.dialog_infomation);
+                ImageView imgBackground = (ImageView) dialog.findViewById(R.id.imgBackground);
+                TextView textName = (TextView) dialog.findViewById(R.id.tvName);
+                TextView tvArtist = (TextView) dialog.findViewById(R.id.tvLinkArtist);
+                TextView tvMv = (TextView) dialog.findViewById(R.id.tvLinkMv);
+                Picasso.with(Player.this).load(arraySong.get(5)).placeholder(R.drawable.demo)
+                        .error(R.drawable.demo).into(imgBackground, new Callback() {
+                            @Override
+                            public void onSuccess() {
+
+                            }
+
+                            @Override
+                            public void onError() {
+
+                            }
+                        });
+                textName.setText(arraySong.get(1));
+                tvArtist.setText(arraySong.get(2));
+
+                tvArtist.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(Player.this, "link ca sĩ", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                tvMv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(Player.this, "link MV", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                //tvMv.setText(arraySong.get(6));
+                dialog.show();
+            }
+        });
+    }
+
+//    public void setArtist(View v){
+//        Toast.makeText(this, "link ca sĩ", Toast.LENGTH_SHORT).show();
+//    }
+//
+//    public void setMv(View v){
+//        Toast.makeText(this, "link MV", Toast.LENGTH_SHORT).show();
+//    }
 
     private void saveDataSong(String s) {
         runOnUiThread(new Runnable() {
@@ -145,10 +269,6 @@ public class Player extends FragmentActivity {
                 String arsong = parser.getValueData(title, "link");
                 arrItemSong.add(i, new Song(tsong, asong, url, lsong, bsong, mvsong, arsong));
             }
-            //Log.d("Player onPostExecute", news);
-            Toast.makeText(Player.this, arrItemSong.get(0).getArtist(), Toast.LENGTH_SHORT).show();
-            //askPermissionAndWriteFile(s);
-            //readDataFromExternalStorage();
         }
     }
 
@@ -331,7 +451,7 @@ public class Player extends FragmentActivity {
             FileOutputStream output = this.openFileOutput(fileName, MODE_PRIVATE);
             output.write(s.getBytes());
             output.close();
-            Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Toast.makeText(this,"Error1:"+ e.getMessage(),Toast.LENGTH_SHORT).show();
@@ -347,6 +467,7 @@ public class Player extends FragmentActivity {
         imgPlay = (ImageButton)findViewById(R.id.imgPlay);
         imgNext = (ImageButton)findViewById(R.id.imgNext);
         imgPre = (ImageButton)findViewById(R.id.imgPre);
+        imgInfo = (ImageButton) findViewById(R.id.imgInfo);
         tvName = (TextView)findViewById(R.id.tvName);
         sbTime = (SeekBar)findViewById(R.id.sbTime);
         tvTimeStart = (TextView)findViewById(R.id.tvTimeCurrent);
@@ -361,83 +482,6 @@ public class Player extends FragmentActivity {
             public void onClick(View view) {
                 Intent retMain = new Intent(Player.this, MainActivity.class);
                 startActivity(retMain);
-            }
-        });
-    }
-
-    private void setPlay(){
-        imgPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(mediaPlayer.isPlaying() && mediaPlayer != null) {
-                    mediaPlayer.pause();
-                    imgPlay.setImageResource(R.drawable.play);
-                }
-                else{
-                    if(firstLauch){
-                        imgPlay.setImageResource(R.drawable.pause);
-                        playMedia();
-                    }
-                    else{
-                        imgPlay.setImageResource(R.drawable.pause);
-                        mediaPlayer.start();
-                        firstLauch = false;
-                    }
-                }
-            }
-        });
-    }
-
-    private void setNext(){
-        imgNext.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                double timeDB = timeStart + 5000;
-                if(timeDB <= timeEnd){
-                    mediaPlayer.seekTo((int) timeDB);
-                }
-                else{
-                    mediaPlayer.seekTo((int) timeEnd);
-                }
-                return false;
-            }
-        });
-    }
-
-    private void setPrevious(){
-        imgPre.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                double timeDB = timeStart - 5000;
-                imgPlay.setImageResource(R.drawable.pause);
-                if(timeDB >= 0){
-                    mediaPlayer.seekTo((int) timeDB);
-                }
-                else{
-                    mediaPlayer.seekTo(0);
-                }
-                return false;
-            }
-        });
-    }
-
-    private void setSeekbar(){
-        sbTime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                if(b){
-                    mediaPlayer.seekTo(i);
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                seekBar.setProgress(loadSeekBar);
             }
         });
     }
@@ -459,7 +503,7 @@ public class Player extends FragmentActivity {
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
                 //playCircle();
-                imgPlay.setImageResource(R.drawable.pause);
+                imgPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
                 mediaPlayer.start();
                 timeEnd = mediaPlayer.getDuration();
                 if(loadSeekBar == 0){
@@ -479,7 +523,7 @@ public class Player extends FragmentActivity {
             myHandler.postDelayed(this, 100);
             sbTime.setProgress((int) timeStart);
             if(utility.convertDuration((long) timeEnd) == utility.convertDuration((long) timeStart)){
-                imgPlay.setImageResource(R.drawable.play);
+                imgPlay.setBackgroundResource(android.R.drawable.ic_media_play);
             }
         }
     };
@@ -499,14 +543,25 @@ public class Player extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mediaPlayer.start();
+        //mediaPlayer.start();
         //playCircle();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mediaPlayer.pause();
+        //mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mediaPlayer.stop();
     }
 
     public static String LoadDataFromURL(String theUrl) {

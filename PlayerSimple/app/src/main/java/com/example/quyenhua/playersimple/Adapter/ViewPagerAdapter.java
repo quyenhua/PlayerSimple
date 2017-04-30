@@ -28,12 +28,12 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         return fragmentList.size();
     }
 
-    @Override
-    public CharSequence getPageTitle(int position) {
-        switch (position){
-            case 0: return "section 1";
-            case 1: return "section 2";
-        }
-        return null;
-    }
+//    @Override
+//    public CharSequence getPageTitle(int position) {
+//        switch (position){
+//            case 0: return "section 1";
+//            case 1: return "section 2";
+//        }
+//        return null;
+//    }
 }

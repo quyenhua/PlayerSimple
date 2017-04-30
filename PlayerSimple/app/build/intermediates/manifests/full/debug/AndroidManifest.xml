@@ -20,15 +20,20 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.example.quyenhua.playersimple.MainActivity"
-            android:configChanges="keyboardHidden|orientation" >
+            android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="com.example.quyenhua.playersimple.PlayerMedia" />
+        <activity android:name="com.example.quyenhua.playersimple.RecentPlay.Player" />
+        <activity android:name="com.example.quyenhua.playersimple.HomeActivity" >
+        </activity>
+        <activity
+            android:name="com.example.quyenhua.playersimple.StartActivity"
+            android:theme="@style/Theme.Design.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.quyenhua.playersimple.PlayerMedia" />
-        <activity android:name="com.example.quyenhua.playersimple.RecentPlay.Player" />
     </application>
 
 </manifest>

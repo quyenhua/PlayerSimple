@@ -14,15 +14,22 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation">
+            android:configChanges="keyboardHidden|orientation"></activity>
+        <activity android:name=".PlayerMedia" />
+        <activity android:name=".RecentPlay.Player" />
+        <activity android:name=".HomeActivity">
+
+        </activity>
+        <activity android:name=".StartActivity"
+            android:theme="@style/Theme.Design.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".PlayerMedia" />
-        <activity android:name=".RecentPlay.Player" />
     </application>
 
 </manifest>
