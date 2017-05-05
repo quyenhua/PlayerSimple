@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:2:1-35:12
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:2:1-36:12
 	package
 		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:3:5-48
 		INJECTED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml
@@ -17,16 +17,20 @@ uses-permission#android.permission.INTERNET
 ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:5:5-67
 	android:name
 		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:5:22-64
+uses-permission#android.permission.WAKE_LOCK
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:6:5-67
+	android:name
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:6:22-65
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:6:5-80
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:7:5-80
 	android:name
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:6:22-78
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:7:22-78
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:7:5-79
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:8:5-79
 	android:name
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:7:22-77
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:8:22-77
 application
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:9:5-33:19
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:10:5-34:19
 MERGED from [com.android.support:design:24.2.1] C:\Users\Quyen Hua\.android\build-cache\621ea84196c8f54fbb6ae1699af7740df826ecb7\output\AndroidManifest.xml:22:5-20
 MERGED from [com.android.support:appcompat-v7:24.2.1] C:\Users\Quyen Hua\.android\build-cache\c8e4758121457e331d2ac9046fb07950895cac1c\output\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:animated-vector-drawable:24.2.1] C:\Users\Quyen Hua\.android\build-cache\02bd39f632c88113e20c143e926dc8fc79c8cec8\output\AndroidManifest.xml:22:5-20
@@ -39,49 +43,49 @@ MERGED from [com.android.support:support-core-ui:24.2.1] C:\Users\Quyen Hua\.and
 MERGED from [com.android.support:support-core-utils:24.2.1] C:\Users\Quyen Hua\.android\build-cache\721ded08b406f6cf0cd5ec252fd8feb1364788ab\output\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-compat:24.2.1] C:\Users\Quyen Hua\.android\build-cache\e23c49df0c895353d96437679748d66a7949f025\output\AndroidManifest.xml:25:5-20
 	android:label
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:12:9-41
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:13:9-41
 	android:supportsRtl
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:13:9-35
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:14:9-35
 	android:allowBackup
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:11:9-35
 	android:icon
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:11:9-43
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:12:9-43
 	android:theme
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:14:9-40
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:15:9-40
 activity#com.example.quyenhua.playersimple.MainActivity
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:15:9-17:75
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:16:9-18:75
 	android:configChanges
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:17:13-63
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:18:13-63
 	android:name
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:16:13-41
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:17:13-41
 activity#com.example.quyenhua.playersimple.PlayerMedia
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:18:9-49
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:19:9-49
 	android:name
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:18:19-46
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:19:19-46
 activity#com.example.quyenhua.playersimple.RecentPlay.Player
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:19:9-55
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:20:9-55
 	android:name
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:19:19-52
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:20:19-52
 activity#com.example.quyenhua.playersimple.HomeActivity
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:20:9-22:20
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:21:9-23:20
 	android:name
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:20:19-47
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:21:19-47
 activity#com.example.quyenhua.playersimple.StartActivity
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:23:9-32:20
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:24:9-33:20
 	android:theme
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:24:13-60
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:25:13-60
 	android:name
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:23:19-48
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:24:19-48
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:26:13-30:29
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:27:13-31:29
 action#android.intent.action.MAIN
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:27:17-69
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:28:17-69
 	android:name
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:27:25-66
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:28:25-66
 category#android.intent.category.LAUNCHER
-ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:29:17-77
+ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:30:17-77
 	android:name
-		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:29:27-74
+		ADDED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml:30:27-74
 uses-sdk
 INJECTED from E:\quyen\HK8\tttn\AndroidPlayer\PlayerSimple\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:design:24.2.1] C:\Users\Quyen Hua\.android\build-cache\621ea84196c8f54fbb6ae1699af7740df826ecb7\output\AndroidManifest.xml:20:5-43

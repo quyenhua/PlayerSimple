@@ -1,12 +1,14 @@
 package com.example.quyenhua.playersimple.RecentPlay;
 
 import android.app.Dialog;
-import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -21,16 +23,12 @@ import android.widget.Toast;
 
 import com.example.quyenhua.playersimple.Adapter.ViewPagerAdapter;
 import com.example.quyenhua.playersimple.Baihat.Song;
-import com.example.quyenhua.playersimple.MainActivity;
+import com.example.quyenhua.playersimple.Interface.ComunicationPlayer;
 import com.example.quyenhua.playersimple.R;
 import com.example.quyenhua.playersimple.Utility.Utility;
 import com.example.quyenhua.playersimple.loadurl.XMLDOMParser;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -46,18 +44,19 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Vector;
 
-public class Player extends FragmentActivity {
+public class Player extends FragmentActivity implements ComunicationPlayer{
 
     private ViewPager vpPlayer;
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
 
-    private ImageButton imgPlay, imgBack, imgNext, imgPre, imgInfo;
+    private ImageButton imgPlay, imgPause, imgNext, imgPre, imgInfo;
     private TextView tvName, tvTimeStart, tvTimeEnd, tvSinger;
     private SeekBar sbTime;
 
     private ArrayList<String> arraySong;
     private ArrayList<Song> arrItemSong;
+    private List<Fragment> fragmentList = new Vector<>();
 
     private int loadSeekBar = 0;
     private double timeStart = 0;
@@ -76,6 +75,7 @@ public class Player extends FragmentActivity {
 
     private String fileName = "note.xml";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +84,6 @@ public class Player extends FragmentActivity {
         initializeView();
 
         arrItemSong = new ArrayList<>();
-        List<Fragment> fragmentList = new Vector<>();
         fragmentList.add(Fragment.instantiate(this, FragmentPlayer.class.getName()));
         fragmentList.add(Fragment.instantiate(this, FragmentSongList.class.getName()));
         fragmentList.add(Fragment.instantiate(this, FragmentLyric.class.getName()));
@@ -105,28 +104,22 @@ public class Player extends FragmentActivity {
         playMedia();
         saveDataSong(arraySong.get(0));
         setEvent();
-
     }
 
     private void setEvent() {
         imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mediaPlayer.isPlaying() && mediaPlayer != null) {
-                    mediaPlayer.pause();
-                    imgPlay.setBackgroundResource(android.R.drawable.ic_media_play);
-                }
-                else{
-                    if(firstLauch){
-                        imgPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
-                        playMedia();
-                    }
-                    else{
-                        imgPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
-                        mediaPlayer.start();
-                        firstLauch = false;
-                    }
-                }
+                mediaPlayer.start();
+                playing();
+            }
+        });
+
+        imgPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediaPlayer.pause();
+                pausing();
             }
         });
 
@@ -148,7 +141,7 @@ public class Player extends FragmentActivity {
             @Override
             public boolean onLongClick(View view) {
                 double timeDB = timeStart - 5000;
-                imgPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
+                //imgPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
                 if(timeDB >= 0){
                     mediaPlayer.seekTo((int) timeDB);
                 }
@@ -223,14 +216,6 @@ public class Player extends FragmentActivity {
         });
     }
 
-//    public void setArtist(View v){
-//        Toast.makeText(this, "link ca sĩ", Toast.LENGTH_SHORT).show();
-//    }
-//
-//    public void setMv(View v){
-//        Toast.makeText(this, "link MV", Toast.LENGTH_SHORT).show();
-//    }
-
     private void saveDataSong(String s) {
         runOnUiThread(new Runnable() {
             @Override
@@ -238,6 +223,13 @@ public class Player extends FragmentActivity {
                 new LoadDataSong().execute(URL_SOURCE + arraySong.get(0));
             }
         });
+    }
+
+    @Override
+    public void changeText(String text) {
+        Bundle lyricBundle = new Bundle();
+        lyricBundle.putString("lyric", arraySong.get(3));
+        fragmentList.get(2).setArguments(lyricBundle);
     }
 
     class LoadDataSong extends AsyncTask<String, Integer, String>{
@@ -255,20 +247,26 @@ public class Player extends FragmentActivity {
             saveData(s);
             String news = readData();
 
-            Document doc = parser.getDocument(news);
+//            Bundle fragBundle = new Bundle();
+//            fragBundle.putString("arrNew", news);
+//            fragmentList.get(1).setArguments(fragBundle);
 
-            NodeList item = doc.getElementsByTagName("item");
-            for(int i = 0; i < item.getLength(); i++){
-                Element title = (Element) item.item(i);
-                String tsong = parser.getValueData(title, "title");
-                String asong = parser.getValueData(title, "performer");
-                String url = parser.getValueData(title, "source");
-                String lsong = parser.getValueData(title, "lyric");
-                String bsong = parser.getValueData(title, "backimage");
-                String mvsong = parser.getValueData(title, "mv");
-                String arsong = parser.getValueData(title, "link");
-                arrItemSong.add(i, new Song(tsong, asong, url, lsong, bsong, mvsong, arsong));
-            }
+//            Document doc = parser.getDocument(news);
+//
+//            //Toast.makeText(Player.this, doc.getTextContent(), Toast.LENGTH_SHORT).show();
+//
+//            NodeList item = doc.getElementsByTagName("item");
+//            for(int i = 0; i < item.getLength(); i++){
+//                Element title = (Element) item.item(i);
+//                String tsong = parser.getValueData(title, "title");
+//                String asong = parser.getValueData(title, "performer");
+//                String url = parser.getValueData(title, "source");
+//                String lsong = parser.getValueData(title, "lyric");
+//                String bsong = parser.getValueData(title, "backimage");
+//                String mvsong = parser.getValueData(title, "mv");
+//                String arsong = parser.getValueData(title, "link");
+//                arrItemSong.add(i, new Song(tsong, asong, url, lsong, bsong, mvsong, arsong));
+//            }
         }
     }
 
@@ -448,7 +446,7 @@ public class Player extends FragmentActivity {
 //            e.printStackTrace();
 //        }
         try {
-            FileOutputStream output = this.openFileOutput(fileName, MODE_PRIVATE);
+            FileOutputStream output = this.openFileOutput(fileName, MODE_APPEND);
             output.write(s.getBytes());
             output.close();
             //Toast.makeText(this, "saved", Toast.LENGTH_SHORT).show();
@@ -463,7 +461,7 @@ public class Player extends FragmentActivity {
 
     private void initializeView(){
         vpPlayer = (ViewPager) findViewById(R.id.vpPlayer);
-        imgBack = (ImageButton)findViewById(R.id.imgBack);
+        imgPause = (ImageButton)findViewById(R.id.imgPause);
         imgPlay = (ImageButton)findViewById(R.id.imgPlay);
         imgNext = (ImageButton)findViewById(R.id.imgNext);
         imgPre = (ImageButton)findViewById(R.id.imgPre);
@@ -476,18 +474,11 @@ public class Player extends FragmentActivity {
         tabLayout = (TabLayout)findViewById(R.id.tabLayout);
     }
 
-    private void setBack(){
-        imgBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent retMain = new Intent(Player.this, MainActivity.class);
-                startActivity(retMain);
-            }
-        });
-    }
-
     private void playMedia(){
         firstLauch = false;
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setWakeMode(Player.this, PowerManager.PARTIAL_WAKE_LOCK);
+        //mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         try {
             mediaPlayer.setDataSource(arraySong.get(3));
         } catch (IOException e) {
@@ -500,19 +491,38 @@ public class Player extends FragmentActivity {
 
         mediaPlayer.prepareAsync();
         mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onPrepared(MediaPlayer mediaPlayer) {
                 //playCircle();
-                imgPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
+                //imgPlay.setBackgroundResource(android.R.drawable.ic_media_pause);
+                playing();
                 mediaPlayer.start();
                 timeEnd = mediaPlayer.getDuration();
+                timeStart = mediaPlayer.getCurrentPosition();
                 if(loadSeekBar == 0){
                     sbTime.setMax((int) timeEnd);
+                    loadSeekBar = 1;
                 }
+
                 myHandler.postDelayed(UpdateTime, 100);
                 tvTimeEnd.setText(utility.convertDuration((long) timeEnd));
             }
         });
+    }
+
+    private void pausing() {
+        imgPause.setEnabled(false);
+        imgPause.setVisibility(View.INVISIBLE);
+        imgPlay.setEnabled(true);
+        imgPlay.setVisibility(View.VISIBLE);
+    }
+
+    private void playing() {
+        imgPlay.setEnabled(false);
+        imgPlay.setVisibility(View.INVISIBLE);
+        imgPause.setEnabled(true);
+        imgPause.setVisibility(View.VISIBLE);
     }
 
     private Runnable UpdateTime = new Runnable() {
@@ -522,8 +532,8 @@ public class Player extends FragmentActivity {
             tvTimeStart.setText(utility.convertDuration((long) timeStart));
             myHandler.postDelayed(this, 100);
             sbTime.setProgress((int) timeStart);
-            if(utility.convertDuration((long) timeEnd) == utility.convertDuration((long) timeStart)){
-                imgPlay.setBackgroundResource(android.R.drawable.ic_media_play);
+            if(utility.convertDuration((long) timeEnd).equals(utility.convertDuration((long) timeStart))){
+                pausing();
             }
         }
     };
@@ -556,6 +566,7 @@ public class Player extends FragmentActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        //mediaPlayer.pause();
     }
 
     @Override

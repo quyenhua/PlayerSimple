@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quyenhua.playersimple.Adapter.SlideAdapter;
 import com.example.quyenhua.playersimple.Adapter.SongAdapter;
@@ -45,6 +46,9 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
     private ArrayList<String> arrayBaiHat;
     private ArrayList<String> arrayList;
     ArrayList<Song> hotSongList;
+
+    private String searchName = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +67,15 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        return false;
+        Toast.makeText(this, query, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,"" + arrayList.size(), Toast.LENGTH_SHORT).show();
+        return true;
     }
 
     @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
+    public boolean onQueryTextChange(final String newText) {
+        searchName = newText;
+        return true;
     }
 
     class ReadXML extends AsyncTask<String, Integer, String> {
@@ -168,7 +175,7 @@ public class HomeActivity extends AppCompatActivity implements SearchView.OnQuer
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu){
         getMenuInflater().inflate(R.menu.menu, menu);
         addMenuItem(menu);
 
