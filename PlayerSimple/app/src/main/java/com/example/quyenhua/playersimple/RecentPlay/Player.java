@@ -1,6 +1,5 @@
 package com.example.quyenhua.playersimple.RecentPlay;
 
-import android.app.Dialog;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
@@ -16,7 +15,6 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +25,6 @@ import com.example.quyenhua.playersimple.Interface.ComunicationPlayer;
 import com.example.quyenhua.playersimple.R;
 import com.example.quyenhua.playersimple.Utility.Utility;
 import com.example.quyenhua.playersimple.loadurl.XMLDOMParser;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -50,7 +46,7 @@ public class Player extends FragmentActivity implements ComunicationPlayer{
     private ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
 
-    private ImageButton imgPlay, imgPause, imgNext, imgPre, imgInfo;
+    private ImageButton imgPlay, imgPause, imgNext, imgPre, imgShuffle, imgRepeat;
     private TextView tvName, tvTimeStart, tvTimeEnd, tvSinger;
     private SeekBar sbTime;
 
@@ -68,6 +64,7 @@ public class Player extends FragmentActivity implements ComunicationPlayer{
     private MediaPlayer mediaPlayer = new MediaPlayer();
     private Handler myHandler = new Handler();
     private Utility utility = new Utility();
+    private Bundle bundle1 = new Bundle();
 
     private XMLDOMParser parser = new XMLDOMParser();
 
@@ -91,11 +88,14 @@ public class Player extends FragmentActivity implements ComunicationPlayer{
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentList);
         vpPlayer.setAdapter(viewPagerAdapter);
 
+        bundle1.putStringArrayList("itemSong", arraySong);
+
         //tabLayout.setupWithViewPager(vpPlayer);
 
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null) {
             arraySong = bundle.getStringArrayList("arrSong");
+            arraySong.add("true");
         }
 
         tvName.setText(arraySong.get(1));
@@ -171,49 +171,49 @@ public class Player extends FragmentActivity implements ComunicationPlayer{
             }
         });
 
-        imgInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Dialog dialog = new Dialog(Player.this);
-                dialog.setTitle("Infomation");
-                dialog.setCancelable(true);
-                dialog.setContentView(R.layout.dialog_infomation);
-                ImageView imgBackground = (ImageView) dialog.findViewById(R.id.imgBackground);
-                TextView textName = (TextView) dialog.findViewById(R.id.tvName);
-                TextView tvArtist = (TextView) dialog.findViewById(R.id.tvLinkArtist);
-                TextView tvMv = (TextView) dialog.findViewById(R.id.tvLinkMv);
-                Picasso.with(Player.this).load(arraySong.get(5)).placeholder(R.drawable.demo)
-                        .error(R.drawable.demo).into(imgBackground, new Callback() {
-                            @Override
-                            public void onSuccess() {
-
-                            }
-
-                            @Override
-                            public void onError() {
-
-                            }
-                        });
-                textName.setText(arraySong.get(1));
-                tvArtist.setText(arraySong.get(2));
-
-                tvArtist.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(Player.this, "link ca sĩ", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                tvMv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(Player.this, "link MV", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                //tvMv.setText(arraySong.get(6));
-                dialog.show();
-            }
-        });
+//        imgInfo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Dialog dialog = new Dialog(Player.this);
+//                dialog.setTitle("Infomation");
+//                dialog.setCancelable(true);
+//                dialog.setContentView(R.layout.dialog_infomation);
+//                ImageView imgBackground = (ImageView) dialog.findViewById(R.id.imgBackground);
+//                TextView textName = (TextView) dialog.findViewById(R.id.tvName);
+//                TextView tvArtist = (TextView) dialog.findViewById(R.id.tvLinkArtist);
+//                TextView tvMv = (TextView) dialog.findViewById(R.id.tvLinkMv);
+//                Picasso.with(Player.this).load(arraySong.get(5)).placeholder(R.drawable.demo)
+//                        .error(R.drawable.demo).into(imgBackground, new Callback() {
+//                            @Override
+//                            public void onSuccess() {
+//
+//                            }
+//
+//                            @Override
+//                            public void onError() {
+//
+//                            }
+//                        });
+//                textName.setText(arraySong.get(1));
+//                tvArtist.setText(arraySong.get(2));
+//
+//                tvArtist.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(Player.this, "link ca sĩ", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//                tvMv.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(Player.this, "link MV", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//                //tvMv.setText(arraySong.get(6));
+//                dialog.show();
+//            }
+//        });
     }
 
     private void saveDataSong(String s) {
@@ -465,13 +465,13 @@ public class Player extends FragmentActivity implements ComunicationPlayer{
         imgPlay = (ImageButton)findViewById(R.id.imgPlay);
         imgNext = (ImageButton)findViewById(R.id.imgNext);
         imgPre = (ImageButton)findViewById(R.id.imgPre);
-        imgInfo = (ImageButton) findViewById(R.id.imgInfo);
+        imgShuffle = (ImageButton) findViewById(R.id.imgShuffle);
+        imgRepeat = (ImageButton) findViewById(R.id.imgRepeat);
         tvName = (TextView)findViewById(R.id.tvName);
         sbTime = (SeekBar)findViewById(R.id.sbTime);
         tvTimeStart = (TextView)findViewById(R.id.tvTimeCurrent);
         tvTimeEnd = (TextView)findViewById(R.id.tvTimeEnd);
         tvSinger = (TextView)findViewById(R.id.tvSinger);
-        tabLayout = (TabLayout)findViewById(R.id.tabLayout);
     }
 
     private void playMedia(){
@@ -512,6 +512,8 @@ public class Player extends FragmentActivity implements ComunicationPlayer{
     }
 
     private void pausing() {
+        arraySong.set(8, "false");
+        fragmentList.get(0).setArguments(bundle1);
         imgPause.setEnabled(false);
         imgPause.setVisibility(View.INVISIBLE);
         imgPlay.setEnabled(true);
@@ -519,6 +521,8 @@ public class Player extends FragmentActivity implements ComunicationPlayer{
     }
 
     private void playing() {
+        arraySong.set(8, "true");
+        fragmentList.get(0).setArguments(bundle1);
         imgPlay.setEnabled(false);
         imgPlay.setVisibility(View.INVISIBLE);
         imgPause.setEnabled(true);
